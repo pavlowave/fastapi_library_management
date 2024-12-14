@@ -43,4 +43,4 @@ def create_borrow(db: Session, borrow: schemas.BorrowCreate):
         db.commit()
         db.refresh(db_borrow)
         return db_borrow
-    raise ValueError("Нет доступных копий книги")
+    raise ValueError("No available copies")
