@@ -70,16 +70,15 @@ def return_borrow(borrow_id: int, return_date: schemas.BorrowReturn, db: Session
         raise HTTPException(status_code=404, detail="Borrow not found")
 
     if borrow.return_date:
-        raise HTTPException(status_code=400, detail="Borrow already returned")
-
-    borrow.return_date = return_date.return_date
-    db.commit()
-    db.refresh(borrow)
-
-    book = db.query(models.Book).filter(models.Book.id == borrow.book_id).first()
-    if book:
-        book.available_copies += 1
+        borrow.return_date = return_date.return_date
         db.commit()
-        db.refresh(book)
+        db.refresh(borrow)
+        book = db.query(models.Book).filter(models.Book.id == borrow.book_id).first()
 
+        if book:
+            book.available_copies += 1
+            db.commit()
+            db.refresh(book)
+        raise HTTPException(status_code=400, detail="Borrow already returned")
+    
     return borrow
