@@ -81,8 +81,7 @@ uvicorn app.main:app --reload
 ```
 ## Использование
 
-Документация API доступна по адресу:
-
-- http://127.0.0.1:8000/redoc/ (Redoc)
-- http://127.0.0.1:8000/swagger/ (Swagger)
+- **Документация API** доступна по адресам:
+    - http://127.0.0.1:8000/docs (Swagger)
+    - http://127.0.0.1:8000/redoc (Redoc)
 
